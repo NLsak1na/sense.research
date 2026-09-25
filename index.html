@@ -329,6 +329,122 @@
         <p id="status"></p>
         
     </section>
+
+    <!-- =========================
+     ③ 事後アンケート画面
+    ========================== -->
+
+    <section id="post-survey-screen" style="display: none;">
+
+        <div class="centering_parent">
+
+            <div class="centering_item">
+
+                <h1>
+                    事後アンケート
+                </h1>
+
+                <p>
+                    すべての短文並び替えが終了しました。<br>
+                    最後に、以下の質問にお答えください。
+                </p>
+                
+                <!-- 問題3のコンセプト -->
+                
+                <p>
+                    <b>
+                        問題3の短文について、何らかの共通するコンセプトを持って
+                        集められていると感じましたか？
+                    </b>
+                </p>
+                <select id="conceptAwareness">
+                    <option value="">
+                        選択してください
+                    </option>
+                    
+                    <option value="気づいた">
+                        気づいた
+                    </option>
+
+                    <option value="なんとなく気づいた">
+                        なんとなく気づいた
+                    </option>
+
+                    <option value="気づかなかった">
+                        気づかなかった
+                    </option>
+                    
+                </select>
+
+                <!-- 短文のジャンル -->
+                <p>
+                    <b>
+                        ② 全体を通して、短文はどのようなジャンルから
+                        集められていると感じましたか？
+                    </b>
+                </p>
+                
+                <textarea
+                    id="sentenceGenre"
+                    rows="4"
+                    placeholder="(ex.小説、SNS、新聞、曲名など)"
+                    ></textarea>
+
+
+                <!-- AI生成文への気づき -->
+                <p>
+                    <b>
+                        問題4・5には、AIが生成した短文が含まれていました。
+                        <br>そのことに気づきましたか？
+                    </b>
+                </p>
+                
+                <select id="aiAwareness">
+                    <option value="">
+                        選択してください
+                    </option>
+                    
+                    <option value="気づいた">
+                        気づいた
+                    </option>
+                    
+                    <option value="なんとなく気づいた">
+                        なんとなく気づいた
+                    </option>
+                    
+                    <option value="気づかなかった">
+                        気づかなかった
+                    </option>
+                    
+                </select>
+                
+                <!-- 自由記述 -->
+                
+                <p>
+                    <b>
+                        その他、アンケートについて気づいたことや
+                        <br>改善点、感想などがあれば自由にお書きください。
+                    </b>
+                </p>
+
+                <textarea
+                    id="postComment"
+                    rows="6"
+                    placeholder="自由にご記入ください。"
+                    ></textarea>
+                <!-- 送信 -->
+                
+                <p>
+                    <button id="postSurveyButton">
+                        事後アンケートを送信する
+                    </button>
+                </p>
+
+                <p id="postSurveyStatus"></p>
+                
+            </div>
+        </div>
+    </section>
     
     <!-- =========================
          JavaScript
