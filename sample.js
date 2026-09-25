@@ -327,36 +327,42 @@ nextQuestionButton.addEventListener("click", () => {
 
         .then(response => response.json())
 
-        .then(data => {
+            .then(data => {
+                // 短文アンケートの送信完了
+                nextQuestionButton.style.display = "none";
 
-            nextQuestionButton.textContent =
-                "送信済み";
+                status.textContent =
+                    "短文アンケートの回答を送信しました。";
+                // 短文アンケート画面を非表示
+                document.getElementById("survey-screen").style.display = "none";
 
-            status.textContent =
-                "ご回答ありがとうございました。";
+                // 事後アンケート画面を表示
+                document.getElementById("post-survey-screen").style.display = "block";
 
-        })
+                // 画面を一番上へ
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+            })
+            .catch(error => {
 
-        .catch(error => {
+                console.error(error);
 
-            console.error(error);
+                nextQuestionButton.disabled = false;
 
-            nextQuestionButton.disabled = false;
+                nextQuestionButton.textContent =
+                    "送信する";
 
-            nextQuestionButton.textContent =
-                "送信する";
-
-            status.textContent =
-                "送信に失敗しました。もう一度お試しください。";
-
-        });
+                status.textContent =
+                    "送信に失敗しました。もう一度お試しください。";
+            });
 
 
         // 問題6へ進まないために終了
         return;
     }
-
-
+    
     // ==============================
     // 問題5ではない場合
     // → 次の問題へ
