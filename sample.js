@@ -493,3 +493,114 @@ document
     }, 100);
 
 });
+
+// ==============================
+// 事後アンケート送信
+// ==============================
+
+document
+.getElementById("postSurveyButton")
+.addEventListener("click", () => {
+
+    // 回答を取得
+    const conceptAwareness =
+        document.getElementById("conceptAwareness").value;
+
+    const sentenceGenre =
+        document.getElementById("sentenceGenre").value;
+
+    const aiAwareness =
+        document.getElementById("aiAwareness").value;
+
+    const postComment =
+        document.getElementById("postComment").value;
+
+
+    // 未回答チェック
+    if (conceptAwareness === "") {
+
+        alert("問題3についての質問に回答してください。");
+
+        return;
+
+    }
+
+    if (sentenceGenre === "") {
+
+        alert("短文のジャンルについて回答してください。");
+
+        return;
+
+    }
+
+    if (aiAwareness === "") {
+
+        alert("AI生成文についての質問に回答してください。");
+
+        return;
+
+    }
+
+
+    // 二重送信防止
+    const postSurveyButton =
+        document.getElementById("postSurveyButton");
+
+    postSurveyButton.disabled = true;
+
+    document.getElementById("postSurveyStatus").textContent =
+        "送信中…";
+
+
+    // GASへ送信
+    fetch(
+        "https://script.google.com/macros/s/AKfycbwOQUdTm3o2CgmYjLP9xQEzqxQcPZT3avwh6fnfbInnydIP-iADGV30-OcKa_7tH3FF/exec",
+        {
+
+            method: "POST",
+
+            body: JSON.stringify({
+
+                type: "postSurvey",
+
+                userId: userId,
+
+                conceptAwareness: conceptAwareness,
+
+                sentenceGenre: sentenceGenre,
+
+                aiAwareness: aiAwareness,
+
+                postComment: postComment
+
+            })
+
+        }
+    )
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        document.getElementById("postSurveyStatus").textContent =
+            "ご回答ありがとうございました。";
+
+        postSurveyButton.textContent =
+            "送信済み";
+
+        postSurveyButton.disabled = true;
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById("postSurveyStatus").textContent =
+            "送信に失敗しました。もう一度お試しください。";
+
+        postSurveyButton.disabled = false;
+
+    });
+
+});
