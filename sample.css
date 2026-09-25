@@ -60,3 +60,18 @@ select {
     padding: 0 10px;
     margin: 8px 0;
 }
+
+#postComment {
+    width: 90%;
+    max-width: 500px;
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+#postSurveyButton {
+    min-height: 48px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
