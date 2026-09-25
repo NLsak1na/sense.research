@@ -73,8 +73,16 @@ select {
 #postSurveyButton {
     display: block;
     margin: auto;
-    margin-top:20px;
-    padding:10px 20px;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 24px;
+}
+
+#postSurveyStatus {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
 }
 
 #sentenceGenre {
