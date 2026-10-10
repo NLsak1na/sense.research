@@ -7,6 +7,7 @@ let gender = "";
 let genre = "";
 let frequency = "";
 let snsFrequency = "";
+let AIChat = "";
 
 
 // ==============================
@@ -317,6 +318,8 @@ nextQuestionButton.addEventListener("click", () => {
                     frequency: frequency,
 
                     snsFrequency: snsFrequency,
+
+                    AIChat: AIChat,
                     
                     answers: answers,
 
@@ -424,6 +427,9 @@ document
     snsFrequency =
         document.getElementById("snsFrequency").value;
 
+    AIChat =
+        document.getElementById("AIChat").value;
+
 
     // 未回答チェック
 
@@ -475,6 +481,16 @@ document
         return;
     
     }
+    
+    if (AIChat === "") {
+        
+        alert(
+            "AIチャットの利用頻度を選択してください。"
+        );
+        
+        return;
+    
+    }
 
 
     // 回答内容を確認
@@ -488,6 +504,8 @@ document
     console.log("読む頻度:", frequency);
 
     console.log("SNSの利用頻度:", snsFrequency);
+    
+    console.log("AIチャットの利用頻度:", AIChat);
 
 
     // 事前質問画面を非表示
@@ -590,6 +608,8 @@ document
                 postComment: postComment,
                 
                 snsFrequency: snsFrequency,
+
+                AIChat: AIChat
 
             })
 
