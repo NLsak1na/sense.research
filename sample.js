@@ -419,6 +419,9 @@ document
     frequency =
         document.getElementById("frequency").value;
 
+    snsFrequency =
+        document.getElementById("snsFrequency").value;
+
 
     // 未回答チェック
 
@@ -460,6 +463,16 @@ document
         return;
 
     }
+    
+    if (snsFrequency === "") {
+        
+        alert(
+            "SNSの利用頻度を選択してください。"
+        );
+        
+        return;
+    
+    }
 
 
     // 回答内容を確認
@@ -471,6 +484,8 @@ document
     console.log("文章ジャンル:", genre);
 
     console.log("読む頻度:", frequency);
+
+    console.log("SNSの利用頻度:", snsFrequency);
 
 
     // 事前質問画面を非表示
@@ -570,7 +585,9 @@ document
 
                 aiAwareness: aiAwareness,
 
-                postComment: postComment
+                postComment: postComment,
+                
+                snsFrequency: snsFrequency,
 
             })
 
