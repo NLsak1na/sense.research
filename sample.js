@@ -6,6 +6,7 @@ let age = "";
 let gender = "";
 let genre = "";
 let frequency = "";
+let snsFrequency = "";
 
 
 // ==============================
