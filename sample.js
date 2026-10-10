@@ -609,7 +609,7 @@ document
                 
                 snsFrequency: snsFrequency,
 
-                AIChat: AIChat
+                aiChat: aiChat,
 
             })
 
