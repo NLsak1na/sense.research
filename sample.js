@@ -316,6 +316,8 @@ nextQuestionButton.addEventListener("click", () => {
 
                     frequency: frequency,
 
+                    snsFrequency: snsFrequency,
+                    
                     answers: answers,
 
                     elapsedTime: elapsedTime
