@@ -532,113 +532,148 @@ document
 // 事後アンケート送信
 // ==============================
 
+
 document
-.getElementById("postSurveyButton")
-.addEventListener("click", () => {
+  .getElementById("postSurveyButton")
+  .addEventListener("click", () => {
 
-    // 回答を取得
-    const conceptAwareness =
-        document.getElementById("conceptAwareness").value;
+    // 問1：複数選択
+    const senseCriteria = [
+      ...document.querySelectorAll(
+        'input[name="senseCriteria"]:checked'
+      )
+    ].map(input => input.value);
 
-    const sentenceGenre =
-        document.getElementById("sentenceGenre").value;
+    const criteriaOther = document
+      .getElementById("criteriaOtherText").value.trim();
 
-    const aiAwareness =
-        document.getElementById("aiAwareness").value;
+    // 問2～7：単一選択
+    const rankingEase =
+      document.querySelector('input[name="rankingEase"]:checked')?.value || "";
+
+    const rankingDifficulty =
+      document.querySelector('input[name="rankingDifficulty"]:checked')?.value || "";
+
+    const songSourceImpression =
+      document.querySelector('input[name="songSourceImpression"]:checked')?.value || "";
+
+    const knownSentences =
+      document.querySelector('input[name="knownSentences"]:checked')?.value || "";
+
+    const knownSentencesInfluence =
+      document.querySelector('input[name="knownSentencesInfluence"]:checked')?.value || "";
+
+    const aiSentenceAwareness =
+      document.querySelector('input[name="aiSentenceAwareness"]:checked')?.value || "";
+
+    // 問8～9：記述式
+    const perceivedGenre =
+      document.getElementById("perceivedGenre").value.trim();
 
     const postComment =
-        document.getElementById("postComment").value;
+      document.getElementById("postComment").value.trim();
 
-
-    // 未回答チェック
-    if (conceptAwareness === "") {
-
-        alert("問題3についての質問に回答してください。");
-
-        return;
-
+    // 必須項目の確認
+    if (senseCriteria.length === 0) {
+      alert("問1で、センスを判断した基準を1つ以上選択してください。");
+      return;
     }
 
-    if (sentenceGenre === "") {
-
-        alert("短文のジャンルについて回答してください。");
-
-        return;
-
+    if (
+      document.getElementById("criteriaOtherCheck").checked &&
+      criteriaOther === ""
+    ) {
+      alert("問1で「その他」を選択した場合は、内容を入力してください。");
+      return;
     }
 
-    if (aiAwareness === "") {
-
-        alert("AI生成文についての質問に回答してください。");
-
-        return;
-
+    if (!rankingEase) {
+      alert("問2に回答してください。");
+      return;
     }
 
+    if (!rankingDifficulty) {
+      alert("問3に回答してください。");
+      return;
+    }
+
+    if (!songSourceImpression) {
+      alert("問4に回答してください。");
+      return;
+    }
+
+    if (!knownSentences) {
+      alert("問5に回答してください。");
+      return;
+    }
+
+    if (!knownSentencesInfluence) {
+      alert("問6に回答してください。");
+      return;
+    }
+
+    if (!aiSentenceAwareness) {
+      alert("問7に回答してください。");
+      return;
+    }
+
+    if (!perceivedGenre) {
+      alert("問8に回答してください。");
+      return;
+    }
+
+    const postSurveyButton =
+      document.getElementById("postSurveyButton");
+
+    const postSurveyStatus =
+      document.getElementById("postSurveyStatus");
 
     // 二重送信防止
-    const postSurveyButton =
-        document.getElementById("postSurveyButton");
-
     postSurveyButton.disabled = true;
-
-    document.getElementById("postSurveyStatus").textContent =
-        "送信中…";
-
+    postSurveyStatus.textContent = "送信中…";
 
     // GASへ送信
     fetch(
-        "https://script.google.com/macros/s/AKfycbwOQUdTm3o2CgmYjLP9xQEzqxQcPZT3avwh6fnfbInnydIP-iADGV30-OcKa_7tH3FF/exec",
-        {
+      "https://script.google.com/macros/s/AKfycbwOQUdTm3o2CgmYjLP9xQEzqxQcPZT3avwh6fnfbInnydIP-iADGV30-OcKa_7tH3FF/exec",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          type: "postSurvey",
+          userId: userId,
 
-            method: "POST",
+          senseCriteria: senseCriteria,
+          criteriaOther: criteriaOther,
 
-            body: JSON.stringify({
+          rankingEase: rankingEase,
+          rankingDifficulty: rankingDifficulty,
+          songSourceImpression: songSourceImpression,
+          knownSentences: knownSentences,
+          knownSentencesInfluence: knownSentencesInfluence,
+          aiSentenceAwareness: aiSentenceAwareness,
 
-                type: "postSurvey",
-
-                userId: userId,
-
-                conceptAwareness: conceptAwareness,
-
-                sentenceGenre: sentenceGenre,
-
-                aiAwareness: aiAwareness,
-
-                postComment: postComment,
-                
-                snsFrequency: snsFrequency,
-
-                aiChat: aiChat,
-
-            })
-
-        }
+          perceivedGenre: perceivedGenre,
+          postComment: postComment
+        })
+      }
     )
+      .then(response => response.json())
+      .then(data => {
+        if (data.result !== "success") {
+          throw new Error("GASから成功応答がありません。");
+        }
 
-    .then(response => response.json())
+        postSurveyStatus.textContent =
+          "ご回答ありがとうございました。";
 
-    .then(data => {
-
-        document.getElementById("postSurveyStatus").textContent =
-            "ご回答ありがとうございました。";
-
-        postSurveyButton.textContent =
-            "送信済み";
-
+        postSurveyButton.textContent = "送信済み";
         postSurveyButton.disabled = true;
-
-    })
-
-    .catch(error => {
-
+      })
+      .catch(error => {
         console.error(error);
 
-        document.getElementById("postSurveyStatus").textContent =
-            "送信に失敗しました。もう一度お試しください。";
+        postSurveyStatus.textContent =
+          "送信に失敗しました。もう一度お試しください。";
 
         postSurveyButton.disabled = false;
-
-    });
-
-});
+      });
+  });
