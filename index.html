@@ -365,125 +365,103 @@
     <!-- =========================
      ③ 事後アンケート画面
     ========================== -->
+    <div id="post-survey-screen" style="display: none;">
 
-    <section id="post-survey-screen" style="display: none;">
+        <h2>事後アンケート</h2>
+        <p>短文の並び替えについて、以下の質問にお答えください。</p>
 
-        <div class="centering_parent">
-
-            <div class="centering_item">
-
-                <h1>
-                    事後アンケート
-                </h1>
-
-                <p>
-                    すべての短文並び替えが終了しました。<br>
-                    最後に、以下の質問にお答えください。
-                </p>
-                
-                <!-- 問題3のコンセプト -->
-                
-                <p>
-                    <b>
-                        20文の短文を、センスが良いと感じる順に並び替えることは容易でしたか？
-                    </b>
-                </p>
-                <select id="conceptAwareness">
-                    <option value="">
-                        選択してください
-                    </option>
-                    
-                    <option value="非常に難しかった">
-                        非常に難しかった
-                    </option>
-
-                    <option value="やや難しかった">
-                        やや難しかった
-                    </option>
-
-                    <option value="どちらともいえない">
-                        どちらともいえない
-                    </option>
-
-                    <option value="やや容易だった">
-                        やや容易だった
-                    </option>
-
-                    <option value="非常に容易だった">
-                        非常に容易だった
-                    </option>
-                    
-                </select>
-
-                <!-- 短文のジャンル -->
-                <p>
-                    <b>
-                        全体を通して、短文はどのようなジャンルから
-                        <br>集められていると感じましたか？
-                    </b>
-                </p>
-                
-                <textarea
-                    id="sentenceGenre"
-                    rows="4"
-                    placeholder="(ex.小説、SNS、新聞、曲名など)"
-                    ></textarea>
-
-
-                <!-- AI生成文への気づき -->
-                <p>
-                    <b>
-                        問題4・5には、AIが生成した短文が含まれていました。
-                        <br>そのことに気づきましたか？
-                    </b>
-                </p>
-                
-                <select id="aiAwareness">
-                    <option value="">
-                        選択してください
-                    </option>
-                    
-                    <option value="気づいた">
-                        気づいた
-                    </option>
-                    
-                    <option value="なんとなく気づいた">
-                        なんとなく気づいた
-                    </option>
-                    
-                    <option value="気づかなかった">
-                        気づかなかった
-                    </option>
-                    
-                </select>
-                
-                <!-- 自由記述 -->
-                
-                <p>
-                    <b>
-                        その他、アンケートについて気づいたことや
-                        <br>改善点、感想などがあれば自由にお書きください。
-                    </b>
-                </p>
-
-                <textarea
-                    id="postComment"
-                    rows="6"
-                    placeholder="自由にご記入ください。"
-                    ></textarea>
-                <!-- 送信 -->
-                
-                <p>
-                    <button id="postSurveyButton">
-                        事後アンケートを送信する
-                    </button>
-                </p>
-
-                <p id="postSurveyStatus"></p>
-                
-            </div>
+        <!-- 問1 -->
+        <div class="post-question">
+            <p><strong>問1. センスを判断した基準は何ですか。</strong>（複数選択可）</p>
+            <label><input type="checkbox" name="senseCriteria" value="言葉選びが巧み"> 言葉選びが巧み</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="意外性がある"> 意外性がある</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="ユーモアがある"> ユーモアがある</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="表現が美しい・洗練されている"> 表現が美しい・洗練されている</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="短く簡潔にまとまっている"> 短く簡潔にまとまっている</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="リズムや語感が良い"> リズムや語感が良い</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="共感できる・感情に訴える"> 共感できる・感情に訴える</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="情景やイメージが浮かぶ"> 情景やイメージが浮かぶ</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="独創性・新規性がある"> 独創性・新規性がある</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="意味に深みや解釈の余地がある"> 意味に深みや解釈の余地がある</label><br>
+            <label><input type="checkbox" name="senseCriteria" value="自分の好みに合っている"> 自分の好みに合っている</label><br>
+            <label><input type="checkbox" id="criteriaOtherCheck" name="senseCriteria" value="その他"> その他</label>
+            <input type="text" id="criteriaOtherText" placeholder="その他の基準（任意）">
         </div>
-    </section>
+
+        <!-- 問2 -->
+        <div class="post-question">
+            <p><strong>問2. 順位のつけやすさはどうでしたか。</strong></p>
+            <label><input type="radio" name="rankingEase" value="非常に難しかった"> 非常に難しかった</label><br>
+            <label><input type="radio" name="rankingEase" value="やや難しかった"> やや難しかった</label><br>
+            <label><input type="radio" name="rankingEase" value="どちらともいえない"> どちらともいえない</label><br>
+            <label><input type="radio" name="rankingEase" value="やや容易だった"> やや容易だった</label><br>
+            <label><input type="radio" name="rankingEase" value="非常に容易だった"> 非常に容易だった</label>
+        </div>
+
+        <!-- 問3 -->
+        <div class="post-question">
+            <p><strong>問3. センスが良いと感じる短文同士でも、順位に明確な差をつけることは難しいと感じましたか。</strong></p>
+            <label><input type="radio" name="rankingDifficulty" value="全くそう思わない"> 全くそう思わない</label><br>
+            <label><input type="radio" name="rankingDifficulty" value="あまりそう思わない"> あまりそう思わない</label><br>
+            <label><input type="radio" name="rankingDifficulty" value="どちらともいえない"> どちらともいえない</label><br>
+            <label><input type="radio" name="rankingDifficulty" value="ややそう思う"> ややそう思う</label><br>
+            <label><input type="radio" name="rankingDifficulty" value="非常にそう思う"> 非常にそう思う</label>
+        </div>
+
+        <!-- 問4 -->
+        <div class="post-question">
+            <p><strong>問4. 問3の短文は歌詞・曲名・アルバム名から選ばれたものでしたが、それを踏まえて短文に対する印象は変わりましたか。</strong></p>
+            <label><input type="radio" name="songSourceImpression" value="大きく変わった"> 大きく変わった</label><br>
+            <label><input type="radio" name="songSourceImpression" value="少し変わった"> 少し変わった</label><br>
+            <label><input type="radio" name="songSourceImpression" value="あまり変わらなかった"> あまり変わらなかった</label><br>
+            <label><input type="radio" name="songSourceImpression" value="全く変わらなかった"> 全く変わらなかった</label><br>
+            <label><input type="radio" name="songSourceImpression" value="分からない"> 分からない</label>
+        </div>
+
+        <!-- 問5 -->
+        <div class="post-question">
+            <p><strong>問5. 提示された短文の中に、以前から知っているものはありましたか。</strong></p>
+            <label><input type="radio" name="knownSentences" value="多くあった"> 多くあった</label><br>
+            <label><input type="radio" name="knownSentences" value="いくつかあった"> いくつかあった</label><br>
+            <label><input type="radio" name="knownSentences" value="ほとんどなかった"> ほとんどなかった</label><br>
+            <label><input type="radio" name="knownSentences" value="全くなかった"> 全くなかった</label><br>
+            <label><input type="radio" name="knownSentences" value="分からない"> 分からない</label>
+        </div>
+
+        <!-- 問6 -->
+        <div class="post-question">
+            <p><strong>問6. また、それらは評価に影響しましたか。</strong></p>
+            <label><input type="radio" name="knownSentencesInfluence" value="全体的に高く評価した"> 全体的に高く評価した</label><br>
+            <label><input type="radio" name="knownSentencesInfluence" value="全体的にやや高く評価した"> 全体的にやや高く評価した</label><br>
+            <label><input type="radio" name="knownSentencesInfluence" value="全体的にやや低く評価した"> 全体的にやや低く評価した</label><br>
+            <label><input type="radio" name="knownSentencesInfluence" value="全体的に低く評価した"> 全体的に低く評価した</label><br>
+            <label><input type="radio" name="knownSentencesInfluence" value="短文によって評価は違った"> 短文によって評価は違った</label><br>
+            <label><input type="radio" name="knownSentencesInfluence" value="知っている短文はなかった"> 知っている短文はなかった</label>
+        </div>
+
+        <!-- 問7 -->
+        <div class="post-question">
+            <p><strong>問7. 問4・問5には、一部AIが生成した短文が含まれていましたが、それに気づきましたか。</strong></p>
+            <label><input type="radio" name="aiSentenceAwareness" value="気づいた"> 気づいた</label><br>
+            <label><input type="radio" name="aiSentenceAwareness" value="やや気づいた"> やや気づいた</label><br>
+            <label><input type="radio" name="aiSentenceAwareness" value="気づかなかった"> 気づかなかった</label>
+        </div>
+
+        <!-- 問8 -->
+        <div class="post-question">
+            <p><strong>問8. 全体を通して、短文はどのようなジャンルから集められていると感じましたか。</strong></p>
+            <textarea id="perceivedGenre" rows="4" placeholder="回答を入力してください"></textarea>
+        </div>
+
+        <!-- 問9 -->
+        <div class="post-question">
+            <p><strong>問9. 自由記述（任意）</strong></p>
+            <textarea id="postComment" rows="4" placeholder="感想や気づいたことなど、ご自由にお書きください"></textarea>
+        </div>
+
+        <button type="button" id="postSurveyButton">回答を送信する</button>
+        <p id="postSurveyStatus"></p>
+    </div>
     
     <!-- =========================
          JavaScript
