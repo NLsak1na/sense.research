@@ -183,7 +183,7 @@ function showQuestion(questionNumber) {
 
     // 問題番号を表示
     questionTitle.textContent =
-        "問題" + (questionNumber + 1);
+        "セクション" + (questionNumber + 1);
 
 
     // 問題開始時刻を記録
