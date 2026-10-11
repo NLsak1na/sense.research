@@ -93,3 +93,25 @@ select {
     box-sizing: border-box;
     resize: vertical;
 }
+
+
+.post-question {
+  margin: 24px 0;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.post-question label {
+  display: inline-block;
+  margin: 5px 0;
+}
+
+.post-question textarea,
+#criteriaOtherText {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+}
